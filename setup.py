@@ -1,12 +1,5 @@
-import os
-import pathlib
-import sys
 import tensorflow as tf
-from collections import defaultdict
-from io import StringIO
-from matplotlib import pyplot as plt
 from PIL import Image
-from IPython.display import display
 import io
 import json                    
 import base64                  
@@ -16,7 +9,7 @@ from PIL import Image
 from object_detection.utils import ops as utils_ops
 from object_detection.utils import label_map_util
 from object_detection.utils import visualization_utils as vis_util
-from flask import Flask, request, abort
+from flask import Flask, request
 from flask_cors import CORS
 
 app = Flask(__name__)          
