@@ -5,9 +5,7 @@ import json
 import base64                  
 import logging             
 import numpy as np
-from PIL import Image
 from object_detection.utils import ops as utils_ops
-from object_detection.utils import label_map_util
 from object_detection.utils import visualization_utils as vis_util
 from flask import Flask, request
 from flask_cors import CORS
@@ -16,9 +14,8 @@ app = Flask(__name__)
 app.logger.setLevel(logging.DEBUG)
 
 CORS(app)
-PATH_TO_LABELS = 'object_detection/labelmap.pbtxt'
 
-category_index = label_map_util.create_category_index_from_labelmap(PATH_TO_LABELS, use_display_name=True)
+category_index = {1: {'id': 1, 'name': 'Box'}}
 detection_model = tf.saved_model.load('object_detection/inference_graph/saved_model')
 
 @app.route("/test", methods=['POST'])
@@ -99,7 +96,7 @@ def show_inference(model, image_path):
 def run_server_api():
     utils_ops.tf = tf.compat.v1
     tf.gfile = tf.io.gfile
-
+    
     app.run(host='0.0.0.0', port=8080)
 
   
